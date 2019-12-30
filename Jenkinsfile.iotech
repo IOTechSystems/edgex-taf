@@ -5,16 +5,22 @@ pipeline {
         stage('Run test') {
             steps {
                 sh "docker run --rm --network host -v ${env.WORKSPACE}:${env.WORKSPACE} -w ${env.WORKSPACE} \
-                -v /var/run/docker.sock:/var/run/docker.sock iotechsys/dev-testing-edgex-taf-common:1.0.0 \
-                --exclude Skipped -u . -p ${params.PROFILE}"
+                    -v /var/run/docker.sock:/var/run/docker.sock iotechsys/dev-testing-edgex-taf-common:1.0.0-x86_64 \
+                    --exclude Skipped -u . -p ${params.PROFILE}"
+                }
             }
         }
-
         stage('Clean up') {
             steps {
-                sh 'docker kill $(docker ps -aq)'
-                sh 'docker rmi -f $(docker images -aq)'
-                sh 'docker system prune -f -a'
+                script {
+                    try {
+                        sh 'docker kill $(docker ps -aq)'
+                    } catch(err) {
+                        echo 'Stop containers done.'
+                    } finally {
+                        sh 'docker system prune -f -a'
+                    }
+                }
             }
         }
 
