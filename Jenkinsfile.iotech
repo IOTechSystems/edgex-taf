@@ -7,7 +7,6 @@ pipeline {
                 sh "docker run --rm --network host -v ${env.WORKSPACE}:${env.WORKSPACE} -w ${env.WORKSPACE} \
                     -v /var/run/docker.sock:/var/run/docker.sock iotechsys/dev-testing-edgex-taf-common:1.0.0-x86_64 \
                     --exclude Skipped -u . -p ${params.PROFILE}"
-                }
             }
         }
         stage('Clean up') {
@@ -37,6 +36,6 @@ pipeline {
                         reportName: 'EdgeX Taf Report']
                 )
             }
-         }
+        }
     }
 }
