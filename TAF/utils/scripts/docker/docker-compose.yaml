@@ -297,6 +297,7 @@ services:
     - "49990:49990"
     container_name: edgex-device-virtual
     hostname: edgex-device-virtual
+    privileged: true
     networks:
       edgex-network:
         aliases:
@@ -322,6 +323,7 @@ services:
      - "49988:49988"
     container_name: edgex-device-random
     hostname: edgex-device-random
+    privileged: true
     networks:
      edgex-network:
        aliases:
@@ -366,6 +368,7 @@ services:
      - "49991:49991"
     container_name: edgex-device-modbus
     hostname: edgex-device-modbus
+    privileged: true
     networks:
      edgex-network:
        aliases:

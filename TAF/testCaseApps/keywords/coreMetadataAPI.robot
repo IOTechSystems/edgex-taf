@@ -18,7 +18,7 @@ Create device profile
     ${file_data}=  Get Binary File  ${WORK_DIR}/TAF/config/${PROFILE}/sample_profile.yaml
     ${files}=  Create Dictionary  file=${file_data}
     ${resp}=  Post Request  Core Metadata  ${deviceProfileUri}/uploadfile  files=${files}
-    run keyword if  ${resp.status_code}!=200  log to console  ${resp.content}
+    run keyword if  ${resp.status_code}!=200  log  ${resp.content}
     Should Be Equal As Strings  ${resp.status_code}  200
     set suite variable  ${deviceProfileId}  ${resp.content}
 
@@ -45,7 +45,7 @@ Delete device profile by name
     ${deviceProfileName}=   Query device profile by id and return by device profile name
     Create Session  Core Metadata  url=${coreMetadataUrl}
     ${resp}=  Delete Request  Core Metadata  ${deviceProfileUri}/name/${deviceProfileName}
-    run keyword if  ${resp.status_code}!=200  log to console  ${resp.content}
+    run keyword if  ${resp.status_code}!=200  log  ${resp.content}
     Should Be Equal As Strings  ${resp.status_code}  200
 
 # Device
@@ -56,7 +56,7 @@ Create device
     ${newdata}=  replace string  ${data}   %DeviceServiceName%    ${DEVICE_SERVICE_EDGEX_NAME}
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${resp}=  Post Request  Core Metadata  ${deviceUri}  data=${newdata}  headers=${headers}
-    run keyword if  ${resp.status_code}!=200  log to console  ${resp.content}
+    run keyword if  ${resp.status_code}!=200  log  ${resp.content}
     Should Be Equal As Strings  ${resp.status_code}  200
     set suite variable  ${device_id}   ${resp.content}
 
@@ -70,7 +70,7 @@ Creat device with autoEvents parameter
     ${newdata}=  replace string  ${newdata}   %ReadingName%    ${reading_name}
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${resp}=  Post Request  Core Metadata  ${deviceUri}  data=${newdata}  headers=${headers}
-    run keyword if  ${resp.status_code}!=200  log to console  ${resp.content}
+    run keyword if  ${resp.status_code}!=200  log  ${resp.content}
     Should Be Equal As Strings  ${resp.status_code}  200
     set test variable  ${device_id}   ${resp.content}
 
@@ -88,7 +88,7 @@ Delete device by name
     ${deviceName}=    Query device by id and return device name
     Create Session  Core Metadata  url=${coreMetadataUrl}
     ${resp}=  Delete Request  Core Metadata  ${deviceUri}/name/${deviceName}
-    run keyword if  ${resp.status_code}!=200  log to console  ${resp.content}
+    run keyword if  ${resp.status_code}!=200  log  ${resp.content}
     Should Be Equal As Strings  ${resp.status_code}  200
 
 Delete device profile and device
