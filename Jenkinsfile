@@ -29,7 +29,7 @@ pipeline {
                         dir ('TAF/testArtifacts/reports/edgex/') {
                             sh "mv log.html ${service_profile}-log.html"
                             sh "mv report.html ${service_profile}-report.html"
-                            // sh "mv result.xml ${service_profile}-result.xml"
+                            sh "mv result.xml ${service_profile}-result.xml"
                         }
                     }
 
