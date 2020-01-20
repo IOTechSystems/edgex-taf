@@ -10,6 +10,7 @@ Resource         TAF/testCaseApps/keywords/loggingAPI.robot
 Resource         TAF/testCaseApps/keywords/commonKeywords.robot
 Suite Setup      Setup Suite
 Suite Teardown   Suite Teardown
+Default Tags    skipped
 
 *** Variables ***
 ${SUITE}                service_operation
